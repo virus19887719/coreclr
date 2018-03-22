@@ -30,8 +30,12 @@
     <PropertyGroup>
       <_OptimizationDataFeed Condition="'$(DotNetBuildOffline)' != 'true'">--source https://dotnet.myget.org/F/dotnet-core-optimization-data/api/v3/index.json</_OptimizationDataFeed>
     </PropertyGroup>
+
+    <Message Importance="High" Text="DotNetBuildOffline=$(DotNetBuildOffline), " />
+    <Message Importance="High" Text="RestoringOptData: $(DotnetRestoreCommand) $(_OptimizationDataFeed) $(SourceDir).nuget/optdata/optdata.csproj" />
+
     <Exec Command="$(DotnetRestoreCommand) $(_OptimizationDataFeed) $(SourceDir).nuget/optdata/optdata.csproj"
-          StandardOutputImportance="Low" />
+          StandardOutputImportance="High" />
   </Target>
 
   <!--
